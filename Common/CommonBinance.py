@@ -27,7 +27,7 @@ class CommonBinance:
         # Lấy dữ liệu thị trường từ sàn Binance
         # 1d
         ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, since=since, limit=1000)
-
+        
         # Chuyển dữ liệu thành DataFrame
         data = pd.DataFrame(ohlcv, columns=['Timestamp', 'Open', 'High', 'Low', 'Close', 'Volume'])
         data['Timestamp'] = pd.to_datetime(data['Timestamp'], unit='ms')         
@@ -36,7 +36,7 @@ class CommonBinance:
         return data
     
     @staticmethod
-    def loaddataBinance_Limit(symbol, from_date, to_date):
+    def loaddataBinance_Limit(symbol, from_date, to_date, timeframe):
         import pandas as pd
         import ccxt 
 
@@ -44,7 +44,7 @@ class CommonBinance:
         exchange = ccxt.binance()
 
         # Lấy dữ liệu thị trường từ sàn Binance
-        ohlcv = exchange.fetch_ohlcv(symbol, timeframe='1d', limit=1000)  # Lấy 1000 điểm dữ liệu
+        ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=1000)  # Lấy 1000 điểm dữ liệu
 
         # Chuyển dữ liệu thành DataFrame
         data = pd.DataFrame(ohlcv, columns=['Timestamp', 'Open', 'High', 'Low', 'Close', 'Volume'])
